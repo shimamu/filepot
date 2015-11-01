@@ -7,7 +7,7 @@
 * Runs on the **PC** or **tablet** or **smartphone**.
 
 ## Download
-You can download the latest version from dist folder.
+You can download the latest version from [Release Page](https://github.com/shimamu/filepot/releases).
 
 ## Requirements
 * Any modern Webbrowser.
