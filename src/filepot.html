@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,minimum-scale=1, maximum-scale=1, user-scalable=yes">
+	<title>filepot</title>
+	<link href="./css/style.css?__inline=true" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../lib/js/underscore/underscore.js?__inline=true"></script>
+	<script type="text/javascript" src="../lib/js/jquery/jquery-2.1.4.js?__inline=true"></script>
+	<script type="text/javascript" src="../lib/js/jquery-tmpl/jquery.tmpl.js?__inline=true"></script>
+	<link rel="shortcut icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCHgAAY2l6AP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAEAAAAAAAAAAAAzMzMzMzMAADAAAAAAAwAAMCIiIiIDAAAwIiIiIgMAADAiIiIiAwAAMCIiIiIDAAAwIiIiIgMAMzAiIiIiAzMzMCIiIiIDMzMwIiIiIgMzMzAAAiIiAzMzMQACIiIDMzMzEAIiIgMzMzMxAAAAAzMAAAAAAAAAAD/8AAAgBAAAIAQAACAEAAAgBAAAIAQAACAEAADgBwAA4AcAAOAHAADgBwAA4AcAAPAHAAD4BwAA" type="image/vnd.microsoft.icon">
+</head>
+<body>
+<div class="page">
+	<header>
+		<hgroup id="title">
+		<h1>filepot</h1>
+		<div class="branch">- branch <span id="branch">1</span> -</div>
+		<div id="menu">
+			<select id="language"></select>
+			<div class="commandList">
+				<ul>
+					<li class="command">
+						<a href="javascript:void(0);" command="downloadFilePot">
+							<span type="msg" value="SAVE"></span>
+						</a>
+					<li class="command">
+						<a href="javascript:void(0);" command="downloadNewFilePot">
+							<span type="msg" value="NEW"></span>
+						</a>
+					<li class="command">
+						<a href="javascript:void(0);" command="undo">
+							<span type="msg" value="UNDO"></span>
+						</a>
+				</ul>
+			</div>
+		</div>
+		</hgroup>
+	</header>
+	<section id="main">
+		<div id="dropArea">
+			<div id="drop">
+				<div id="dropMessage">
+					<span type="msg" value="DROP_FILES_HERE"></span>
+				</div>
+			</div>
+		</div>
+		<div id="selectFiles">
+			<span type="msg" value="OR"></span>
+			<input type="file" id="fileSelector" multiple />
+		</div>
+		<section>
+			<div id="config" type="data">
+				<div name="animation" value="on"></div>
+				<div name="locale" value="en"></div>
+			</div>
+			<div id="repository" type="data"></div>
+			<div id="commitHistory" type="data"></div>
+		</section>
+	</section>
+	<footer>
+		powered by filepot <span id="version">1.0.0</span>
+	</footer>
+	<div id="script">
+		<script id="LanguageTemplate" type="text/x-jquery-tmpl">
+			<option value="${label}">${value}</option>
+		</script>
+		<script id="StoredFileTemplate" type="text/x-jquery-tmpl">
+			<div class="File" no=${no} fileName="${fileName}"></div>
+		</script>
+		<script id="StoredFileDataTemplate" type="text/x-jquery-tmpl">
+			<div version="${version}" dataurl="${dataURL}"></div>
+		</script>
+		<script id="TagTemplate" type="text/x-jquery-tmpl">
+			<div class="Tag" no="${no}">
+				<div class="header">
+					<span class="date" title="${date}">
+						<span class="year">${year}</span>
+						<span class="monthDay">${month}/${day}</span>
+					</span>
+					<span class="no">#${no}</span>
+					<span class="downloadSnapShot">
+						<a href="javascript:void(0);" command="downloadSnapShot">
+							<span type="msg" value="DOWNLOAD_SNAPSHOT"></span>
+						</a>
+					</span>
+				</div>
+			</div>
+		</script>
+		<script id="TagFooterTemplate" type="text/x-jquery-tmpl">
+			<div class="footer">
+				<a href="javascript:void(0);" command="downloadBranchFilePot" value="SAVE_ONLY_LATEST_VERSION"></a>
+			</div>
+		</script>
+		<script id="SnapShotTemplate" type="text/x-jquery-tmpl">
+			<ul class="snapshot"></ul>
+		</script>
+		<script id="CurrentFileTemplate" type="text/x-jquery-tmpl">
+			<li class="currentFile" fileName="${fileName}" status="${status}"></li>
+		</script>
+		<script id="CurrentFileUpdateTemplate" type="text/x-jquery-tmpl">
+			<li class="currentFile" fileName="${fileName}" no="${no}" version="${version}" status="${status}">
+				<div class="currentVersion">
+					<span class="version ${status}" value="${message}">ver.${version}</span>
+				</div>
+				<div class="linkAndComment">
+					<div class="download">
+						<a href="javascript:void(0);" command="downloadCurrentFile">${fileName}</a>
+					</div>
+					<div class="commentList">
+					</div>
+				</div>
+			</li>
+		</script>
+		<script id="CurrentFileFilterTemplate" type="text/x-jquery-tmpl">
+			<div class="fileFilter">i
+				<a class="filter" href="javascript:void(0);" command="filterCurrentFile" value="DISPLAY_ONLY_THIS_FILE"></a>
+			</div>
+		</script>
+		<script id="CommentInputTemplate" type="text/x-jquery-tmpl">
+			<div class="commentInput">i
+				<a class="input" href="javascript:void(0);" command="requestComment" value="WRITE_A_COMMENT"> </a>
+			</div>
+		</script>
+		<script id="CommentItemTemplate" type="text/x-jquery-tmpl">
+			<div class="item">
+				<div class="date">${year}/${month}/${day}</div>
+				<div class="msg">${text}</div>
+			</div>
+		</script>
+		<script type="text/javascript" src="./js/namespace.js?__inline=true"></script>
+		<script type="text/javascript" src="../lib/js/ecl/ecl.js?__inline=true"></script>
+		<script type="text/javascript" src="./js/zip.js?__inline=true"></script>
+		<script src="./js/filepot.js?__inline=true"></script>
+	</div>
+</div>
+</body>
+</html>
+

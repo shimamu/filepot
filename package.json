@@ -1,0 +1,22 @@
+{
+  "name": "filepot",
+  "version": "1.0.0",
+  "description": "An single html page version control system.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shimamu/filepot/"
+  },
+  "author": "Ryo Shimamura",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-inline": "^0.3.6"
+  }
+}
