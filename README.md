@@ -6,6 +6,9 @@
 * **Drag & drop** or select files, and you can register files.
 * Runs on the **PC** or **tablet** or **smartphone**.
 
+## Sample
+You can use [sample](https://shimamu.github.io/filepot-sample/).
+
 ## Download
 You can download the latest version from [Release Page](https://github.com/shimamu/filepot/releases).
 
